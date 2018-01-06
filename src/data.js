@@ -630,7 +630,7 @@ QueryBuilder.prototype.getGroupFlags = function(flags, all) {
  * @returns {string}
  * @fires QueryBuilder.changer:translate
  */
-QueryBuilder.prototype.translate = function(category, key) {
+QueryBuilder.prototype.translate = function(category, key, dict) {
     if (!key) {
         key = category;
         category = undefined;

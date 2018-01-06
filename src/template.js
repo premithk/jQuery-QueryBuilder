@@ -59,10 +59,10 @@ QueryBuilder.templates.filterSelect = '\
     {{? optgroup !== filter.optgroup }} \
       {{? optgroup !== null }}</optgroup>{{?}} \
       {{? (optgroup = filter.optgroup) !== null }} \
-        <optgroup label="{{= it.translate(it.settings.optgroups[optgroup]) }}"> \
+        <optgroup label="{{= it.translate(null, "label", it.settings.optgroups[optgroup]) }}" data-id="{{= optgroup}}"> \
       {{?}} \
     {{?}} \
-    <option value="{{= filter.id }}">{{= it.translate(filter.label) }}</option> \
+    <option value="{{= filter.id }}">{{= it.translate(null, \'label\', filter) }}</option> \
   {{~}} \
   {{? optgroup !== null }}</optgroup>{{?}} \
 </select>';
@@ -79,7 +79,7 @@ QueryBuilder.templates.operatorSelect = '\
     {{? optgroup !== operator.optgroup }} \
       {{? optgroup !== null }}</optgroup>{{?}} \
       {{? (optgroup = operator.optgroup) !== null }} \
-        <optgroup label="{{= it.translate(it.settings.optgroups[optgroup]) }}"> \
+        <optgroup label="{{= it.translate(null, "label", it.settings.optgroups[optgroup]) }}" data-id="{{= optgroup}}"> \
       {{?}} \
     {{?}} \
     <option value="{{= operator.type }}">{{= it.translate("operators", operator.type) }}</option> \

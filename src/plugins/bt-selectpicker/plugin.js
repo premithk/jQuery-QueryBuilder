@@ -14,10 +14,20 @@ QueryBuilder.define('bt-selectpicker', function(options) {
         Utils.error('MissingLibrary', 'Bootstrap Select is required to use "bt-selectpicker" plugin. Get it here: http://silviomoreto.github.io/bootstrap-select');
     }
 
+    var self = this;
+
     var Selectors = QueryBuilder.selectors;
 
     // init selectpicker
     this.on('afterCreateRuleFilters', function(e, rule) {
+        rule.$el.find(Selectors.rule_filter).find('option')
+            .each(function() {
+                var filter = self.getFilterById($(this).val());
+
+                if (filter && filter.icon) {
+                    $(this).attr('data-icon', filter.icon);
+                }
+            });
         rule.$el.find(Selectors.rule_filter).removeClass('form-control').selectpicker(options);
     });
 

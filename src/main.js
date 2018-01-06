@@ -102,6 +102,25 @@ var QueryBuilder = function($el, options) {
      */
     this.lang = null;
 
+    // migration of optgroups config
+    if (this.settings.optgroups) {
+        var displayWarning = false;
+
+        $.each(this.settings.optgroups, function(value, key) {
+            // checks that the item is a string or an object with anything ele than 'icon' and 'label' keys
+            if (typeof key === 'string' || $.grep(Object.keys(value), function(i) { return $.inArray(i, ['icon', 'label']) === -1; }).length > 0) {
+                this.settings.optgroups[key] = {
+                    label: value
+                };
+                displayWarning = true;
+            }
+        }, this);
+
+        if (displayWarning) {
+            console.log('QueryBuilder: obsolete optgroups configuration, see http://querybuilder.js.org/#usage');
+        }
+    }
+
     // translations : english << 'lang_code' << custom
     if (QueryBuilder.regional['en'] === undefined) {
         Utils.error('Config', '"i18n/en.js" not loaded.');
